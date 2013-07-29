@@ -2,6 +2,23 @@ import gdal,gdalconst
 import dateutil
 
 def apply_fn_to_image(in_filename, f, out_filename, out_type):
+	"""Applies the given function to each band of the input image and saves
+	the result to the output filename.
+
+	Parameters:
+
+	* in_filename: Input image filename (must be a GDAL-supported type)
+	* f: The function to apply to the image. Must take two arguments: array, band_id
+	* out_filename: The filename to save the result to. The image will be saved in the same
+	type as the input image.
+	* out_type: The output type of the image, one of the gdalconst.GDT_XX constants 
+
+	The function which is passed will be called once for each band with two arguments:
+	* array: an array containing the data for that band
+	* band_id: the 1-based id of the band - allowing the function to operate differently for each
+	band of an image.
+	"""
+	
 	in_im = gdal.Open(in_filename)
 
 	drv = in_im.GetDriver()
@@ -22,8 +39,3 @@ def apply_fn_to_image(in_filename, f, out_filename, out_type):
 
 	del in_im
 	del out_im
-
-# in_filename = r"E:\_Datastore\Small_DMC.bsq"
-# out_filename = r"E:\_Datastore\Small_DMC_ALTERED.bsq"
-
-# apply_fn_to_image(in_filename, lambda x: x+100, out_filename)
