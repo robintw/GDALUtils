@@ -23,7 +23,7 @@ def image_to_df(filename, bands, nodata=-9999):
 	data = {}
 
 	for band_id in bands:
-		band = im.GetRasterBand(band_id).ReadAsArray()
+		band = im.GetRasterBand(band_id).ReadAsArray().astype(float)
 
 		band[band == nodata] = np.nan
 		data['B%d' % band_id] = band.ravel()
