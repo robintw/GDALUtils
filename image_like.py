@@ -16,6 +16,8 @@ def image_like(orig_im, output_filename, drv=None, datatype=None, nbands=None, x
 		drv = gdal.GetDriverByName(drv)
 	if type(drv) == gdal.Dataset:
 		drv = drv.GetDriver()
+	else:
+		drv = orig_im.GetDriver()
 
 	b = orig_im.GetRasterBand(1)
 
