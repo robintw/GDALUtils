@@ -7,15 +7,16 @@ def apply_fn_to_image(in_filename, f, out_filename, out_type):
 
     Parameters:
 
-    * in_filename: Input image filename (must be a GDAL-supported type) f: The
-    * function to apply to the image. Must take two arguments: array, band_id
+    * in_filename: Input image filename (must be a GDAL-supported type)
+    * f: The function to apply to the image. Must take two arguments: array, band_id
     * out_filename: The filename to save the result to. The image will be saved
-    * in the same type as the input image. out_type: The output type of the
-    * image, one of the gdalconst.GDT_XX constants
+    in the same type as the input image.
+    * out_type: The output type of the image, one of the gdalconst.GDT_XX constants
 
     The function which is passed will be called once for each band with two
-    arguments: * array: an array containing the data for that band * band_id:
-    the 1-based id of the band - allowing the function to operate differently
+    arguments:
+    * array: an array containing the data for that band
+    * band_id: the 1-based id of the band - allowing the function to operate differently
     for each band of an image. """
 
     in_im = gdal.Open(in_filename)

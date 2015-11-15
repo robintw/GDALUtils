@@ -2,15 +2,8 @@
 import sys
 
 import numpy as np
-import gdal
 
-
-def singleband_image_to_array(filename):
-    img = gdal.Open(filename)
-
-    arr = img.GetRasterBand(1).ReadAsArray()
-
-    return arr
+from io import singleband_image_to_array
 
 
 def compare_images(filename1, filename2):
