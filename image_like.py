@@ -2,6 +2,19 @@ import gdal
 import gdalconst
 
 
+def get_gdal_driver(drv):
+    """Gets a GDAL driver from either a name, or a given GDAL dataset
+
+    (the latter allows you pass a GDAL image object and get the driver
+    used by the image object)"""
+    if type(drv) == str:
+        drv = gdal.GetDriverByName(drv)
+    if type(drv) == gdal.Dataset:
+        drv = drv.GetDriver()
+
+    return drv
+
+
 def image_like(orig_im, output_filename, drv=None, datatype=None, nbands=None,
                xdim=None, ydim=None):
     # Can work when orig_im is a filename or a GDAL image
@@ -11,14 +24,10 @@ def image_like(orig_im, output_filename, drv=None, datatype=None, nbands=None,
     else:
         need_to_close = False
 
-    # Can work when drv is a GDAL Driver or a string with a driver name
-    # So, if a string, convert to a GDAL Driver
-    if type(drv) == str:
-        drv = gdal.GetDriverByName(drv)
-    if type(drv) == gdal.Dataset:
-        drv = drv.GetDriver()
-    else:
+    if drv is None:
         drv = orig_im.GetDriver()
+    else:
+        drv = get_gdal_driver(drv)
 
     b = orig_im.GetRasterBand(1)
 
