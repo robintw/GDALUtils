@@ -3,7 +3,7 @@ import sys
 
 import numpy as np
 
-from io import singleband_image_to_array
+from .io import singleband_image_to_array
 
 
 def compare_images(filename1, filename2):
