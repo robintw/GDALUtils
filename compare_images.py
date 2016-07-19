@@ -3,7 +3,7 @@ import sys
 
 import numpy as np
 
-from io import singleband_image_to_array
+from image_io import singleband_image_to_array
 
 
 def compare_images(filename1, filename2):
@@ -24,6 +24,7 @@ def compare_images(filename1, filename2):
     print("\t %s" % filename1)
     print("\t %s" % filename2)
     print("")
+    print("Difference statistics:")
     print("Min: %.10f" % minval)
     print("Mean: %.10f" % meanval)
     print("Median: %.10f" % medval)
